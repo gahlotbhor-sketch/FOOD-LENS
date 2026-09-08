@@ -1,0 +1,411 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FoodLens | Food Heroes</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="logo">
+            🍎 FoodLens
+        </div>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Food Heroes</a>
+            <a href="#">Food School</a>
+        </nav>
+
+        <div class="xp">
+            ⭐ 240 XP
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <span class="small-title">
+                    🥕 WELCOME, FOOD EXPLORER!
+                </span>
+
+                <h1>
+                    Meet your
+                    <span>Food Heroes</span>
+                    & Sometimes Guests!
+                </h1>
+
+                <p>
+                    Food isn't about good or bad.
+                    Let's discover what different foods
+                    do inside your body!
+                </p>
+
+                <button class="start-btn">
+                    🚀 Start Exploring
+                </button>
+
+            </div>
+
+
+            <div class="hero-character">
+
+                <div class="character-circle">
+                    🥦
+                </div>
+
+                <div class="speech">
+                    "Ready to learn?"
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOD CHARACTER SECTION -->
+
+        <section class="characters">
+
+            <div class="section-heading">
+
+                <span>🧠 FOOD SCHOOL</span>
+
+                <h2>
+                    Who's on your food team?
+                </h2>
+
+                <p>
+                    Some foods help your body in amazing ways.
+                    Others are best enjoyed sometimes.
+                </p>
+
+            </div>
+
+
+            <div class="character-grid">
+
+
+                <!-- PALM OIL -->
+
+                <article class="character-card guest">
+
+                    <div class="character-top">
+
+                        <div class="character-icon">
+                            🦹‍♂️
+                        </div>
+
+                        <span class="badge">
+                            SOMETIMES GUEST
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Meet Palm Oil
+                    </h3>
+
+                    <p class="character-line">
+                        "I'm not exactly the villain..."
+                    </p>
+
+                    <p>
+                        Palm oil is a type of fat.
+                        Your body needs some fat, but
+                        having lots of saturated fat regularly
+                        isn't the best idea.
+                    </p>
+
+                    <div class="lesson">
+
+                        <strong>💡 FoodLens Tip</strong>
+
+                        <p>
+                            It's about <b>how much</b> and
+                            <b>how often</b> — not fear!
+                        </p>
+
+                    </div>
+
+                    <button class="learn-btn">
+                        🔎 Learn about Palm Oil
+                    </button>
+
+                </article>
+
+
+                <!-- SUGAR -->
+
+                <article class="character-card sugar">
+
+                    <div class="character-top">
+
+                        <div class="character-icon">
+                            🍬
+                        </div>
+
+                        <span class="badge">
+                            SWEET TRICKSTER
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Added Sugar
+                    </h3>
+
+                    <p class="character-line">
+                        "I'm REALLY good at hiding!"
+                    </p>
+
+                    <p>
+                        Too much added sugar can sneak
+                        into drinks and snacks without
+                        you noticing.
+                    </p>
+
+                    <div class="lesson">
+
+                        <strong>💡 Detective Tip</strong>
+
+                        <p>
+                            Check the nutrition label
+                            before you grab a snack!
+                        </p>
+
+                    </div>
+
+                    <button class="learn-btn">
+                        🔎 Find the Sugar
+                    </button>
+
+                </article>
+
+
+                <!-- SODIUM -->
+
+                <article class="character-card sodium">
+
+                    <div class="character-top">
+
+                        <div class="character-icon">
+                            🧂
+                        </div>
+
+                        <span class="badge">
+                            SNEAKY ONE
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Sodium
+                    </h3>
+
+                    <p class="character-line">
+                        "You might not even notice me!"
+                    </p>
+
+                    <p>
+                        Your body needs sodium,
+                        but getting too much regularly
+                        isn't great for your health.
+                    </p>
+
+                    <div class="lesson">
+
+                        <strong>💡 Detective Tip</strong>
+
+                        <p>
+                            Compare similar foods and
+                            look at their sodium!
+                        </p>
+
+                    </div>
+
+                    <button class="learn-btn">
+                        🔎 Hunt for Sodium
+                    </button>
+
+                </article>
+
+
+                <!-- FIBRE -->
+
+                <article class="character-card hero-card">
+
+                    <div class="character-top">
+
+                        <div class="character-icon">
+                            🦸‍♂️
+                        </div>
+
+                        <span class="badge">
+                            FOOD HERO
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Fibre
+                    </h3>
+
+                    <p class="character-line">
+                        "I'm here for your gut!"
+                    </p>
+
+                    <p>
+                        Fibre helps support healthy
+                        digestion and can help you
+                        feel full.
+                    </p>
+
+                    <div class="lesson">
+
+                        <strong>⭐ Hero Power</strong>
+
+                        <p>
+                            Whole grains, fruits,
+                            vegetables and legumes
+                            can provide fibre.
+                        </p>
+
+                    </div>
+
+                    <button class="learn-btn">
+                        💪 Discover Fibre
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- PALM OIL SPOTLIGHT -->
+
+        <section class="spotlight">
+
+            <div class="spotlight-character">
+                🦹‍♂️
+            </div>
+
+            <div class="spotlight-content">
+
+                <span class="small-title">
+                    🔍 FOOD DETECTIVE MISSION
+                </span>
+
+                <h2>
+                    Is Palm Oil REALLY a villain?
+                </h2>
+
+                <p>
+                    Not quite! 😄
+                </p>
+
+                <p>
+                    Palm oil isn't automatically a "bad food".
+                    The bigger lesson is that foods can contain
+                    different types of fat, and eating large
+                    amounts of saturated fat regularly isn't ideal.
+                </p>
+
+                <div class="mission-box">
+
+                    <span>🎯 YOUR MISSION</span>
+
+                    <h3>
+                        Find the ingredient list!
+                    </h3>
+
+                    <p>
+                        Can you spot palm oil in a packaged food?
+                    </p>
+
+                </div>
+
+                <button class="mission-btn">
+                    🕵️ Start Mission
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- XP SECTION -->
+
+        <section class="progress">
+
+            <div>
+
+                <span class="small-title">
+                    🏆 YOUR FOOD JOURNEY
+                </span>
+
+                <h2>
+                    Food Explorer Level 4
+                </h2>
+
+                <p>
+                    Keep learning to unlock new characters!
+                </p>
+
+            </div>
+
+            <div class="progress-right">
+
+                <div class="level">
+                    ⭐ 240 / 300 XP
+                </div>
+
+                <div class="progress-bar">
+                    <div></div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            <strong>🍎 FoodLens</strong>
+            <p>
+                Learn your food. Understand your choices.
+            </p>
+        </div>
+
+        <div>
+            <a href="#">About</a>
+            <a href="#">Food School</a>
+            <a href="#">Privacy</a>
+        </div>
+
+    </footer>
+
+</body>
+</html>
+```

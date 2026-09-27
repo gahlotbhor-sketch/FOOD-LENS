@@ -1,92 +1,122 @@
-
 console.log("FoodLens JS connected!");
 
 const searchInput = document.querySelector("#searchInput");
 const searchBtn = document.querySelector("#searchBtn");
 const searchResult = document.querySelector("#searchResult");
 
-let Maggi = {
-    name: "Maggi",
-    category: "Instant Noodles",
-    quantity: "70 grams",
-    sugar: "Low",
-    sodium: "High",
-    palmOil: "Yes",
-    fibre: "Low",
-    Rating: "D"
-};
 
-let lays = {
-    name: "Lays",
-    category: "Chips",
-    quantity: "50 grams",
-    sugar: "Low",
-    sodium: "High",
-    palmOil: "Yes",
-    fibre: "Low",
-    Rating: "D"
-};
+let foodItems = [
 
-let chocolate = {
-    name: "Chocolate",
-    category: "Confectionery",
-    quantity: "100 grams",
-    sugar: "High",
-    sodium: "Low",
-    palmOil: "Yes",
-    fibre: "Low",
-    Rating: "C"
-};
-let kurkure = {
-    name: "Kurkure",
-    category: "Snacks",
-    quantity: "50 grams",
-    sugar: "Low",
-    sodium: "High",
-    palmOil: "Yes",
-    fibre: "Low",
-    Rating: "D"
-};
+    {
+        name: "Maggi",
+        category: "Instant Noodles",
+        quantity: "70 grams",
+        sugar: "Low",
+        sodium: "High",
+        palmOil: "Yes",
+        fibre: "Low",
+        Rating: "D",
+        preservatives: "Yes"
+    },
+
+    {
+        name: "Lays",
+        category: "Chips",
+        quantity: "50 grams",
+        sugar: "Low",
+        sodium: "High",
+        palmOil: "Yes",
+        fibre: "Low",
+        Rating: "D",
+        preservatives: "Yes"
+    },
+
+    {
+        name: "Chocolate",
+        category: "Confectionery",
+        quantity: "100 grams",
+        sugar: "High",
+        sodium: "Low",
+        palmOil: "Yes",
+        fibre: "Low",
+        Rating: "C",
+        preservatives: "Yes"
+    },
+
+    {
+        name: "Kurkure",
+        category: "Snacks",
+        quantity: "50 grams",
+        sugar: "Low",
+        sodium: "High",
+        palmOil: "Yes",
+        fibre: "Low",
+        Rating: "D",
+        preservatives: "Yes"
+    },
+
+    {
+        name: "Oreo",
+        category: "Biscuits",
+        quantity: "50 grams",
+        sugar: "High",
+        sodium: "Low",
+        palmOil: "Yes",
+        fibre: "Low",
+        Rating: "C",
+        preservatives: "Yes"
+    },
+
+    {
+        name: "Cornflakes",
+        category: "Breakfast Cereal",
+        quantity: "250 grams",
+        sugar: "Medium",
+        sodium: "Low",
+        palmOil: "Yes",
+        fibre: "High",
+        Rating: "B",
+        preservatives: "Yes"
+    }
+
+];
+
 
 searchBtn.addEventListener("click", () => {
 
     const food = searchInput.value.trim().toLowerCase();
 
-    if (food === Maggi.name.toLowerCase()) {
+    const product = foodItems.find(item =>
+        item.name.toLowerCase() === food
+    );
 
-        searchResult.textContent =
-            `Product found: ${Maggi.name} | Rating: ${Maggi.Rating}`;
+    if (product) {
 
-    } 
+            searchResult.textContent = `
+    Product found: ${product.name} | Rating: ${product.Rating}
+    | Quantity: ${product.quantity} | Sugar: ${product.sugar}
+    | Sodium: ${product.sodium} | Palm Oil: ${product.palmOil}
+    | Fibre: ${product.fibre} | Preservatives: ${product.preservatives} `;
     
-    else if (food === lays.name.toLowerCase()) {
-
-        searchResult.textContent =
-            `Product found: ${lays.name} | Rating: ${lays.Rating}`;
-
-    } 
-    
-    else if (food === chocolate.name.toLowerCase()) {
-
-        searchResult.textContent =
-            `Product found: ${chocolate.name} | Rating: ${chocolate.Rating}`;
-
-    } 
-    
-    else if (food === kurkure.name.toLowerCase()) {
-
-        searchResult.textContent =
-            `Product found: ${kurkure.name} | Rating: ${kurkure.Rating}`;
-
-    } 
-    
+    }    
     else {
-
         searchResult.textContent = "Product not found";
-
     }
-
 });
 
-let foodItems = [Maggi, lays, chocolate, kurkure];
 
+ const exploreBtn = document.querySelector(".start-btn");
+const palmOilBtn = document.querySelector("#palmOilBtn");
+
+
+palmOilBtn.addEventListener("click", () => {
+    console.log("Palm Oil button clicked");
+
+    palmOilLesson.textContent = "Palm oil comes from palm trees and is used in many packaged foods. Your body needs some fat,but too much of certain fats isn't good for you."
+ 
+});
+exploreBtn.addEventListener("click", () => {
+    document.querySelector("#food-school").scrollIntoView({
+    behavior: "smooth"
+     });
+});

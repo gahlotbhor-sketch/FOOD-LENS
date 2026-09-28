@@ -16,7 +16,8 @@ let foodItems = [
         palmOil: "Yes",
         fibre: "Low",
         Rating: "D",
-        preservatives: "Yes"
+        preservatives: "Yes",
+        barcode: "8901234567890"
     },
 
     {
@@ -28,7 +29,8 @@ let foodItems = [
         palmOil: "Yes",
         fibre: "Low",
         Rating: "D",
-        preservatives: "Yes"
+        preservatives: "Yes",
+         barcode: "8901491101844"
     },
 
     {
@@ -40,7 +42,8 @@ let foodItems = [
         palmOil: "Yes",
         fibre: "Low",
         Rating: "C",
-        preservatives: "Yes"
+        preservatives: "Yes",
+        barcode : "7622201149437"
     },
 
     {
@@ -52,7 +55,8 @@ let foodItems = [
         palmOil: "Yes",
         fibre: "Low",
         Rating: "D",
-        preservatives: "Yes"
+        preservatives: "Yes",
+        barcode: "8901491361026"
     },
 
     {
@@ -64,7 +68,8 @@ let foodItems = [
         palmOil: "Yes",
         fibre: "Low",
         Rating: "C",
-        preservatives: "Yes"
+        preservatives: "Yes",
+        barcode: "8901233022321"
     },
 
     {
@@ -76,7 +81,8 @@ let foodItems = [
         palmOil: "Yes",
         fibre: "High",
         Rating: "B",
-        preservatives: "Yes"
+        preservatives: "Yes",
+        barcode: "8901499008183"
     }
 
 ];
@@ -96,7 +102,8 @@ searchBtn.addEventListener("click", () => {
     Product found: ${product.name} | Rating: ${product.Rating}
     | Quantity: ${product.quantity} | Sugar: ${product.sugar}
     | Sodium: ${product.sodium} | Palm Oil: ${product.palmOil}
-    | Fibre: ${product.fibre} | Preservatives: ${product.preservatives} `;
+    | Fibre: ${product.fibre} | Preservatives: ${product.preservatives} 
+    | barcode: ${product.barcode}` ;
     
     }    
     else {
@@ -117,6 +124,7 @@ const fibreLesson = document.querySelector("#fibreLesson");
 const scanBtn = document.querySelector("#scanBtn");
 const cameraBtn = document.querySelector(".camera-btn");
 const cameraPreview = document.querySelector("#cameraPreview");
+const barcodeResult = document.querySelector("#barcodeResult");
 
 palmOilBtn.addEventListener("click", () => {
     console.log("Palm Oil button clicked");
@@ -151,19 +159,44 @@ scanBtn.addEventListener("click", () => {
 });
 
  
-cameraBtn.addEventListener("click", () => {
-    navigator.mediaDevices.getUserMedia({ 
-        video: true 
-    })
-   .then((stream) => {
-        cameraPreview.srcObject = stream;
-       
-    })
-    .catch((error) => {
-        console.error(" camera access denied:", error);
-    });
+ cameraBtn.addEventListener("click", async () => {
+console.log("Starting barcode scanner...");
+try {
+
+    const result = await codeReader.decodeOnceFromVideoDevice(
+        undefined,
+         "cameraPreview"
+        );
+const barcode = result.text;
+console.log("Barcode detected:",barcode);
+const product = foodItems.find(item => item.barcode === barcode);
+if(product){
+    barcodeResult.textContent =
+     `Product found: ${product.name} | Rating: ${product.Rating} | ` +
+        `Quantity: ${product.quantity} | Sugar: ${product.sugar} | ` +
+        `Sodium: ${product.sodium} | Palm Oil: ${product.palmOil} | ` +
+        `Fibre: ${product.fibre} | Preservatives: ${product.preservatives}`;
+}
+else{
+    barcodeResult.textContent ="Product not found"
+}
+
+
+} catch(eroor){
+        console.error("barcode scanning error:", error);
+    }
 });
+ 
 
+const codeReader = new ZXingBrowser.BrowserMultiFormatReader();
 
+console.log("ZXing scanner ready ✅");
 
-
+ fetch("http://127.0.0.1:8000/food/8901491101844")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error(error);
+    });

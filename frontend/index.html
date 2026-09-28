@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,23 +54,30 @@
                     do inside your body!
                 </p>
 
-<div class="food-search">
-    <input 
-        type="text" 
-        id="searchInput" 
-        placeholder="Search a food...">
-    
-    <button id="searchBtn">
-        🔍 Search
-    </button>
-</div>
+                <div class="food-search">
 
-<p id="searchResult"></p>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search a food...">
 
+                    <button id="searchBtn">
+                        🔍 Search
+                    </button>
 
-              <button class="start-btn">
-    🚀 Start Exploring
-</button>
+                </div>
+
+                <p id="searchResult"></p>
+
+                <!-- SCANNER BUTTON -->
+                <button id="scanBtn" class="scan-btn">
+                    📷 Scan Your Food
+                </button>
+
+                <button class="start-btn">
+                    🚀 Start Exploring
+                </button>
+
             </div>
 
 
@@ -88,11 +94,65 @@
             </div>
 
         </section>
+        </section>
+
+
+        <!-- FOOD SCANNER SECTION -->
+
+        <section id="scanner" class="scanner">
+
+            <div class="scanner-content">
+
+                <span class="small-title">
+                    🔎 FOOD SCANNER
+                </span>
+
+                <h2>
+                    Scan your food!
+                </h2>
+
+                <p>
+                    Point your camera at a barcode
+                    to discover what's inside your food.
+                </p>
+
+                <div class="scanner-box">
+
+                    <div class="scanner-icon">
+                        📷
+                    </div>
+
+                    <h3>
+                        Ready to scan?
+                    </h3>
+
+                    <p>
+                        Your food adventure starts here!
+                    </p>
+                    <video id="cameraPreview" autoplay playsinline></video> 
+
+                    <button class="camera-btn">
+                        📷 Open Camera
+                    </button>
+
+                    <button class="upload-btn">
+                        📁 Upload Barcode Image
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
 
 
         <!-- FOOD CHARACTER SECTION -->
 
-        <section id="food-school" class="characters"> 
+        <section id="food-school" class="characters">
+
+        <!-- FOOD CHARACTER SECTION -->
+
+        <section id="food-school" class="characters">
 
             <div class="section-heading">
 
@@ -143,8 +203,8 @@
                         having lots of saturated fat regularly
                         isn't the best idea.
                     </p>
- 
-                    <div id="palmOilLesson" class="lesson"> 
+
+                    <div id="palmOilLesson" class="lesson">
 
                         <strong>💡 FoodLens Tip</strong>
 
@@ -155,7 +215,7 @@
 
                     </div>
 
-                   <button id="palmOilBtn" class="learn-btn">  
+                    <button id="palmOilBtn" class="learn-btn">
                         🔎 Learn about Palm Oil
                     </button>
 
@@ -196,14 +256,14 @@
 
                         <strong>💡 Detective Tip</strong>
 
-                        <p>
+                        <p id="sugarLesson">
                             Check the nutrition label
                             before you grab a snack!
                         </p>
 
                     </div>
 
-                    <button class="learn-btn">
+                    <button id="sugarBtn" class="learn-btn">
                         🔎 Find the Sugar
                     </button>
 
@@ -244,14 +304,14 @@
 
                         <strong>💡 Detective Tip</strong>
 
-                        <p>
+                        <p id="sodiumLesson">
                             Compare similar foods and
                             look at their sodium!
                         </p>
 
                     </div>
 
-                    <button class="learn-btn">
+                    <button id="sodiumBtn" class="learn-btn">
                         🔎 Hunt for Sodium
                     </button>
 
@@ -292,7 +352,7 @@
 
                         <strong>⭐ Hero Power</strong>
 
-                        <p>
+                        <p id="fibreLesson">
                             Whole grains, fruits,
                             vegetables and legumes
                             can provide fibre.
@@ -300,7 +360,7 @@
 
                     </div>
 
-                    <button class="learn-btn">
+                    <button id="fibreBtn" class="learn-btn">
                         💪 Discover Fibre
                     </button>
 
@@ -405,20 +465,27 @@
     <footer>
 
         <div>
+
             <strong>🍎 FoodLens</strong>
+
             <p>
                 Learn your food. Understand your choices.
             </p>
+
         </div>
 
         <div>
+
             <a href="#">About</a>
             <a href="#">Food School</a>
             <a href="#">Privacy</a>
+
         </div>
 
     </footer>
-<script src="script.js"></script>
+
+
+    <script src="script.js"></script>
+
 </body>
 </html>
-```

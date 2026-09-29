@@ -932,3 +932,21 @@ footer a {
         margin-right: 20px;
     }
 }
+#searchResult {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+}
+#searchResult p {
+    margin: 8px 0;
+}
+#searchResult h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 28px;
+}
+.food-rating {
+    font-weight: 800;
+    font-size: 24px;
+    margin: 12px 0;
+}

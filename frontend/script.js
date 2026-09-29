@@ -4,7 +4,6 @@ const searchInput = document.querySelector("#searchInput");
 const searchBtn = document.querySelector("#searchBtn");
 const searchResult = document.querySelector("#searchResult");
 
-
 let foodItems = [
 
     {
@@ -30,7 +29,7 @@ let foodItems = [
         fibre: "Low",
         Rating: "D",
         preservatives: "Yes",
-         barcode: "8901491101844"
+        barcode: "8901491101844"
     },
 
     {
@@ -43,7 +42,7 @@ let foodItems = [
         fibre: "Low",
         Rating: "C",
         preservatives: "Yes",
-        barcode : "7622201149437"
+        barcode: "7622201149437"
     },
 
     {
@@ -88,6 +87,8 @@ let foodItems = [
 ];
 
 
+// SEARCH FOOD
+
 searchBtn.addEventListener("click", () => {
 
     const food = searchInput.value.trim().toLowerCase();
@@ -98,105 +99,192 @@ searchBtn.addEventListener("click", () => {
 
     if (product) {
 
-            searchResult.textContent = `
-    Product found: ${product.name} | Rating: ${product.Rating}
-    | Quantity: ${product.quantity} | Sugar: ${product.sugar}
-    | Sodium: ${product.sodium} | Palm Oil: ${product.palmOil}
-    | Fibre: ${product.fibre} | Preservatives: ${product.preservatives} 
-    | barcode: ${product.barcode}` ;
-    
-    }    
-    else {
+        fetch(`http://127.0.0.1:8000/food/${product.barcode}`)
+            .then(response => response.json())
+            .then(data => {
+
+                searchResult.innerHTML = `
+                    <h2>${data.name}</h2>
+
+                    <p class="food-rating">
+                        Rating: ${data.rating}
+                    </p>
+
+                    <p>Category: ${data.category}</p>
+                    <p>Sugar: ${data.sugar}</p>
+                    <p>Sodium: ${data.sodium}</p>
+                    <p>Palm Oil: ${data.palmOil}</p>
+                    <p>Fibre: ${data.fibre}</p>
+
+                    <div class="food-alert">
+                        ⚠️ Food Alert
+                        <p>
+                            Check the nutrition label before making your choice.
+                        </p>
+                    </div>
+                `;
+
+            })
+            .catch(error => {
+
+                console.error("API error:", error);
+
+                searchResult.textContent =
+                    "Could not connect to FoodLens backend.";
+
+            });
+
+    } else {
+
         searchResult.textContent = "Product not found";
+
     }
+
 });
 
 
- const exploreBtn = document.querySelector(".start-btn");
+// FOOD SCHOOL
+
+const exploreBtn = document.querySelector(".start-btn");
+
 const palmOilBtn = document.querySelector("#palmOilBtn");
-const  sugarBtn = document.querySelector("#sugarBtn");
+const sugarBtn = document.querySelector("#sugarBtn");
+const sodiumBtn = document.querySelector("#sodiumBtn");
+const fibreBtn = document.querySelector("#fibreBtn");
+
 const palmOilLesson = document.querySelector("#palmOilLesson");
 const sugarLesson = document.querySelector("#sugarLesson");
-const  sodiumBtn = document.querySelector("#sodiumBtn");
 const sodiumLesson = document.querySelector("#sodiumLesson");
-const fibreBtn = document.querySelector("#fibreBtn");
 const fibreLesson = document.querySelector("#fibreLesson");
+
 const scanBtn = document.querySelector("#scanBtn");
-const cameraBtn = document.querySelector(".camera-btn");
-const cameraPreview = document.querySelector("#cameraPreview");
-const barcodeResult = document.querySelector("#barcodeResult");
+
+
+// PALM OIL
 
 palmOilBtn.addEventListener("click", () => {
+
     console.log("Palm Oil button clicked");
 
-    palmOilLesson.textContent = "Palm oil comes from palm trees and is used in many packaged foods. Your body needs some fat,but too much of certain fats isn't good for you."
- 
+    palmOilLesson.textContent =
+        "Palm oil comes from palm trees and is used in many packaged foods. Your body needs some fat, but too much of certain fats isn't good for you.";
+
 });
+
+
+// FIBRE
+
 fibreBtn.addEventListener("click", () => {
+
     console.log("Fibre button clicked");
-    fibreLesson.textContent = "💪 Fibre is your tummy's helper! It helps keep digestion happy and can help you feel full. Look for fibre when you scan your food! 🦸‍♂️🌾"
+
+    fibreLesson.textContent =
+        "💪 Fibre is your tummy's helper! It helps keep digestion happy and can help you feel full. Look for fibre when you scan your food! 🦸‍♂️🌾";
+
 });
+
+
+// SUGAR
 
 sugarBtn.addEventListener("click", () => {
+
     console.log("Sugar button clicked");
-    sugarLesson.textContent =  "🔎 Sugar Detective! When you scan a food, look for 'Total Sugars' and 'Added Sugars' on its nutrition label.";
-});
-sodiumBtn.addEventListener("click", () => {
-    console.log("Sodium button clicked");
-    sodiumLesson.textContent = "🔎 Sodium Sleuth! When you scan a food, look for 'Sodium' on its nutrition label.";
-});
-exploreBtn.addEventListener("click", () => {
-    document.querySelector("#food-school").scrollIntoView({
-    behavior: "smooth"
-     });
+
+    sugarLesson.textContent =
+        "🔎 Sugar Detective! When you scan a food, look for 'Total Sugars' and 'Added Sugars' on its nutrition label.";
+
 });
 
+
+// SODIUM
+
+sodiumBtn.addEventListener("click", () => {
+
+    console.log("Sodium button clicked");
+
+    sodiumLesson.textContent =
+        "🔎 Sodium Sleuth! When you scan a food, look for 'Sodium' on its nutrition label.";
+
+});
+
+
+// START EXPLORING
+
+exploreBtn.addEventListener("click", () => {
+
+    document.querySelector("#food-school").scrollIntoView({
+        behavior: "smooth"
+    });
+
+});
+
+
+// SCAN BUTTON
+
 scanBtn.addEventListener("click", () => {
+
     console.log("Scan button clicked");
+
     document.querySelector("#scanner").scrollIntoView({
         behavior: "smooth"
     });
+
 });
 
- 
- cameraBtn.addEventListener("click", async () => {
-console.log("Starting barcode scanner...");
-try {
 
-    const result = await codeReader.decodeOnceFromVideoDevice(
-        undefined,
-         "cameraPreview"
-        );
-const barcode = result.text;
-console.log("Barcode detected:",barcode);
-const product = foodItems.find(item => item.barcode === barcode);
-if(product){
-    barcodeResult.textContent =
-     `Product found: ${product.name} | Rating: ${product.Rating} | ` +
-        `Quantity: ${product.quantity} | Sugar: ${product.sugar} | ` +
-        `Sodium: ${product.sodium} | Palm Oil: ${product.palmOil} | ` +
-        `Fibre: ${product.fibre} | Preservatives: ${product.preservatives}`;
-}
-else{
-    barcodeResult.textContent ="Product not found"
-}
+// BARCODE SCANNER
 
-
-} catch(eroor){
-        console.error("barcode scanning error:", error);
-    }
-});
- 
+const cameraBtn = document.querySelector(".camera-btn");
+const cameraPreview = document.querySelector("#cameraPreview");
+const barcodeResult = document.querySelector("#barcodeResult");
 
 const codeReader = new ZXingBrowser.BrowserMultiFormatReader();
 
 console.log("ZXing scanner ready ✅");
 
- fetch("http://127.0.0.1:8000/food/8901491101844")
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.error(error);
-    });
+
+cameraBtn.addEventListener("click", async () => {
+
+    console.log("Starting barcode scanner...");
+
+    try {
+
+        const result = await codeReader.decodeOnceFromVideoDevice(
+            undefined,
+            "cameraPreview"
+        );
+
+        const barcode = result.text;
+
+        console.log("Barcode detected:", barcode);
+
+        const product = foodItems.find(item =>
+            item.barcode === barcode
+        );
+
+        if (product) {
+
+            barcodeResult.textContent =
+                `Product found: ${product.name} | ` +
+                `Rating: ${product.Rating} | ` +
+                `Quantity: ${product.quantity} | ` +
+                `Sugar: ${product.sugar} | ` +
+                `Sodium: ${product.sodium} | ` +
+                `Palm Oil: ${product.palmOil} | ` +
+                `Fibre: ${product.fibre} | ` +
+                `Preservatives: ${product.preservatives}`;
+
+        } else {
+
+            barcodeResult.textContent =
+                "Product not found";
+
+        }
+
+    } catch (error) {
+
+        console.error("Barcode scanning error:", error);
+
+    }
+
+});

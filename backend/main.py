@@ -1,16 +1,27 @@
+import os
 import psycopg
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+
+load_dotenv()
+
+
 conn = psycopg.connect(
-    host="localhost",
-    dbname="foodlens",
-    user="postgres",
-    password="YOUR_POSTGRES_PASSWORD",
-    port=5432
+    host=os.getenv("DB_HOST"),
+    dbname=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    port=os.getenv("DB_PORT")
 )
 
+
 print("Database connected!")
+
+
 app = FastAPI()
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -19,6 +30,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/")
+def home():
+    return {"message": "FoodLens backend is running!"}
 
 
 @app.get("/food/{barcode}")
@@ -59,79 +75,3 @@ def get_food(barcode: str):
         "message": "Product not found"
     }
 
-
-food_items = {
-    "8901491101844": {
-        "name": "Lays",
-        "category": "Chips",
-        "sugar": "Low",
-        "sodium": "High",
-        "palmOil": "Yes",
-        "fibre": "Low",
-        "rating": "D"
-    },
-
-    "8901491361026": {
-        "name": "Kurkure",
-        "category": "Snacks",
-        "sugar": "Low",
-        "sodium": "High",
-        "palmOil": "Yes",
-        "fibre": "Low",
-        "rating": "D"
-    },
-
-    "8901234567890": {
-    "name": "Maggi",
-    "category": "Instant Noodles",
-    "sugar": "Low",
-    "sodium": "High",
-    "palmOil": "Yes",
-    "fibre": "Low",
-    "rating": "D"
-},
-"7622201149437": {
-    "name": "Chocolate",
-    "category": "Confectionery",
-    "sugar": "High",
-    "sodium": "Low",
-    "palmOil": "Yes",
-    "fibre": "Low",
-    "rating": "C"
-},
-
-"8901233022321": {
-    "name": "Oreo",
-    "category": "Biscuits",
-    "sugar": "High",
-    "sodium": "Low",
-    "palmOil": "Yes",
-    "fibre": "Low",
-    "rating": "C"
-},
-
-"8901499008183": {
-    "name": "Cornflakes",
-    "category": "Breakfast Cereal",
-    "sugar": "Medium",
-    "sodium": "Low",
-    "palmOil": "Yes",
-    "fibre": "High",
-    "rating": "B"
-}
-}
-
-
-@app.get("/food/{barcode}")
-def get_food(barcode: str):
-    product = food_items.get(barcode)
-
-    if product:
-        return {
-            "barcode": barcode,
-            **product
-        }
-
-    return {
-        "message": "Product not found"
-    }

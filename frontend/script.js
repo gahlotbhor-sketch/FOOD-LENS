@@ -203,7 +203,7 @@ sodiumBtn.addEventListener("click", () => {
     console.log("Sodium button clicked");
 
     sodiumLesson.textContent =
-        "🔎 Sodium Sleuth! When you scan a food, look for 'Sodium' on its nutrition label.";
+        "🔎 Sodium Sleuth! When you scan a food, look for 'Sodium' on the nutrition label.";
 
 });
 
@@ -258,28 +258,37 @@ cameraBtn.addEventListener("click", async () => {
 
         console.log("Barcode detected:", barcode);
 
-        const product = foodItems.find(item =>
-            item.barcode === barcode
-        );
+        fetch(`http://127.0.0.1:8000/food/${barcode}`)
+            .then(response => response.json())
+            .then(data => {
 
-        if (product) {
+                if (data.message) {
 
-            barcodeResult.textContent =
-                `Product found: ${product.name} | ` +
-                `Rating: ${product.Rating} | ` +
-                `Quantity: ${product.quantity} | ` +
-                `Sugar: ${product.sugar} | ` +
-                `Sodium: ${product.sodium} | ` +
-                `Palm Oil: ${product.palmOil} | ` +
-                `Fibre: ${product.fibre} | ` +
-                `Preservatives: ${product.preservatives}`;
+                    barcodeResult.textContent =
+                        "Product not found";
 
-        } else {
+                    return;
+                }
 
-            barcodeResult.textContent =
-                "Product not found";
+                barcodeResult.textContent =
+                    `Product found: ${data.name} | ` +
+                    `Rating: ${data.rating} | ` +
+                    `Quantity: ${data.quantity} | ` +
+                    `Sugar: ${data.sugar} | ` +
+                    `Sodium: ${data.sodium} | ` +
+                    `Palm Oil: ${data.palmOil} | ` +
+                    `Fibre: ${data.fibre} | ` +
+                    `Preservatives: ${data.preservatives}`;
 
-        }
+            })
+            .catch(error => {
+
+                console.error("API error:", error);
+
+                barcodeResult.textContent =
+                    "Could not connect to FoodLens backend.";
+
+            });
 
     } catch (error) {
 

@@ -8,6 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 load_dotenv()
 
 
+# DATABASE CONNECTION
+
 conn = psycopg.connect(
     host=os.getenv("DB_HOST"),
     dbname=os.getenv("DB_NAME"),
@@ -16,12 +18,15 @@ conn = psycopg.connect(
     port=os.getenv("DB_PORT")
 )
 
-
 print("Database connected!")
 
 
+# FASTAPI APP
+
 app = FastAPI()
 
+
+# CORS
 
 app.add_middleware(
     CORSMiddleware,
@@ -32,10 +37,16 @@ app.add_middleware(
 )
 
 
+# HOME
+
 @app.get("/")
 def home():
-    return {"message": "FoodLens backend is running!"}
+    return {
+        "message": "FoodLens backend is running!"
+    }
 
+
+# GET FOOD BY BARCODE
 
 @app.get("/food/{barcode}")
 def get_food(barcode: str):
@@ -75,3 +86,43 @@ def get_food(barcode: str):
         "message": "Product not found"
     }
 
+
+# GET FOOD BY NAME
+
+@app.get("/food/name/{name}")
+def get_food_by_name(name: str):
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT barcode, name, category, quantity,
+               sugar, sodium, palm_oil, fibre,
+               rating, preservatives
+        FROM food_items
+        WHERE LOWER(name) = LOWER(%s)
+        """,
+        (name,)
+    )
+
+    product = cursor.fetchone()
+
+    cursor.close()
+
+    if product:
+        return {
+            "barcode": product[0],
+            "name": product[1],
+            "category": product[2],
+            "quantity": product[3],
+            "sugar": product[4],
+            "sodium": product[5],
+            "palmOil": product[6],
+            "fibre": product[7],
+            "rating": product[8],
+            "preservatives": product[9]
+        }
+
+    return {
+        "message": "Product not found"
+    }
